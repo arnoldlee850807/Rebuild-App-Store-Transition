@@ -5,6 +5,10 @@
 Recreate the card like transition Apple made for the App Store "Today" category. By using collection view + pan gesture recognizer. 
 This project is based on Swift 4.
 
+Here's what it'll look like
+
+![Example](https://github.com/arnoldlee850807/rebuildAppStoreTransition/blob/master/Apr-19-2018%2015-51-52.gif)
+
 ## Installation
 
 Simply copy and paste TransitionClone.swift to your project, and add UIViewControllerTransitioningDelegate to the Class you're going to use.
@@ -96,8 +100,6 @@ Create the panRecognizer, and it should work fine :)
         }
     }
 
+## Special Thanks
 
-
-    
-    
-    
+<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
