@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIViewControllerTransitioningDelegate {
+class MainViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UIViewControllerTransitioningDelegate, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var frankCollectionView: UICollectionView!
     
@@ -21,12 +21,17 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     var imageFrame = CGRect.zero
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        print("collectionViewLayout")
+        return CGSize(width: 375 / 414 * view.frame.width, height: 408 / 736 * view.frame.height)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return picture.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
+        print("cellForItem")
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! frankCollectionViewCell
         cell.myImage.image = picture[indexPath.row]
         cell.myImage.layer.cornerRadius = 5
@@ -37,12 +42,13 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
         cell.shadowView.layer.shadowOffset = CGSize(width: 15, height: 15)
         cell.shadowView.layer.shadowOpacity = 0.8
         
-        ////
+        print("cell.frame \(cell.frame)")
+        
         transition.destinationFrame = CGRect(x: 0, y: 0, width: view.frame.width, height: cell.myImage.frame.height * view.frame.width / cell.myImage.frame.width)
-        ////
+        print("transition.destinationFrame \(transition.destinationFrame)")
         
         imageFrame = cell.myImage.frame
-        print("\(imageFrame)")
+        print("imageFrame \(imageFrame)")
         
         return cell
     }
@@ -74,14 +80,11 @@ class MainViewController: UIViewController, UICollectionViewDelegate, UICollecti
             self.tabBarController?.tabBar.frame = tabFrame!
         })
         
-        if let cell = collectionView.cellForItem(at: indexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? frankCollectionViewCell {
             let a = collectionView.convert(cell.frame, to: collectionView.superview)
             
-            ////
-            transition.startingFrame = CGRect(x: a.minX+14, y: a.minY+14, width: imageFrame.width, height: imageFrame.height)
-            ////
-            
-            print("cell miny\(a.minY)")
+            transition.startingFrame = CGRect(x: a.minX+15, y: a.minY+15, width: 375 / 414 * view.frame.width - 30, height: 408 / 736 * view.frame.height - 30)
+
             let sb = storyboard?.instantiateViewController(withIdentifier: "detail") as! DetailViewController
             sb.image = picture[indexPath.row]
             sb.transitioningDelegate = self
