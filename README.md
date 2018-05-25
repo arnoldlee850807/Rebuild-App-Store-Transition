@@ -1,5 +1,9 @@
 # Rebuilding AppStore Card Like Transition
 
+Check the tutorial here
+
+https://medium.com/@kannolee/rebuilding-appstore-card-like-transition-84a73fc7139b
+
 ## Introduction
 
 Recreate the card like transition Apple made for the App Store "Today" category. By using collection view + pan gesture recognizer. 
